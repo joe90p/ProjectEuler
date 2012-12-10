@@ -10,7 +10,8 @@ namespace ProjectEuler
     {
         static void Main(string[] args)
         {
-            ProjectEuler pe = new ProjectEuler();
+            Problems p = new Problems();
+            long r = p.Problem10(); 
         }
     }
 }

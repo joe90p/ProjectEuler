@@ -9,41 +9,19 @@ namespace ProjectEuler
     {
         public int Problem1()
         {
-            int result = 0;
-            for (int i = 0; i < 1000; i++)
-            {
-                if (i % 3 == 0 || i % 5 == 0)
-                {
-                    result = result + i;
-                }
-            }
-            return result;
+            return Enumerable.Range(1, 999).Where(x => x % 3 == 0 || x % 5 == 0).Sum();
         }
 
         public int Problem2()
         {
-            int result = 0;
-            int num1 = 1;
-            int num2 = 0;
-            int buffer = 0;
-            while (num1 <= 4000000)
-            {
-                if (num1 % 2 == 0)
-                {
-                    result = result + num1;
-                }
-                buffer = num1;
-                num1 = num1 + num2;
-                num2 = buffer;
-
-            }
-            return result;
+            return MathsHelper.GetFibonacciSequenceUpTo(4000000).Where(x => x % 2 == 0).Sum();
         }
 
         public long Problem3()
         {
             long number = 600851475143;
             List<long> primes = new List<long>();
+
             for (long i = 2; i <= Math.Pow(number, 0.5); i++)
             {
                 if (number % i == 0)
@@ -168,15 +146,8 @@ namespace ProjectEuler
 
         public long Problem10()
         {
-            long primeSum = 0;
-            for (long i = 3; i < 2000000; i = i + 2)
-            {
-                if (MathsHelper.IsPrime(i))
-                {
-                    primeSum = primeSum + i;
-                }
-            }
-            return primeSum + 2;
+            Func<long,int,long> func = (l,i) => l+i;
+            return MathsHelper.GetPrimes(2000000).Aggregate(0, func); 
         }
 
         public int TheNthPrimeIs(int whichNumerPrime)

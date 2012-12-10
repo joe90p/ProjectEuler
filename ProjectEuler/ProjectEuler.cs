@@ -855,24 +855,7 @@ namespace ProjectEuler
             }
         }
 
-        public IEnumerable<int> GetPrimes(int n)
-        {
-            int start = 2;
-            BitArray compositeArray = new BitArray(n - start + 1, true);
-            for (int i = start; i <= n; i++)
-            {
-                if (compositeArray[i - start])
-                {
-                    int x = i;
-                    while (x <= n)
-                    {
-                        compositeArray[x - start] = false;
-                        x += i;
-                    }
-                    yield return i;
-                }
-            }
-        }
+        
 
         private IEnumerable<int> GetMultipleSequence(int n, int minPower, int maxPower)
         {
