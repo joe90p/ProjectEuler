@@ -11,7 +11,6 @@ namespace ProjectEuler
         static void Main(string[] args)
         {
             ProjectEuler pe = new ProjectEuler();
-            pe.Problem34Test();
         }
     }
 }

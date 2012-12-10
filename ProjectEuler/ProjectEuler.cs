@@ -355,7 +355,7 @@ namespace ProjectEuler
 
             for (int index = 1; index <= 1000; index++)
             {
-                this.MultiplyListRepresentingNumber(listRepresentingNumber, 2);
+                this.MultiplyListRepresentingNumberVoid(listRepresentingNumber, 2);
             }
 
             int answer = listRepresentingNumber.Sum();
@@ -705,7 +705,7 @@ namespace ProjectEuler
             return true;
         }
 
-        private void MultiplyListRepresentingNumber(List<int> listRepresentingNumber, int multiplyBy)
+        private void MultiplyListRepresentingNumberVoid(List<int> listRepresentingNumber, int multiplyBy)
         {
             int carryOver = 0;
             for (int listPosition = 0; listPosition < listRepresentingNumber.Count; listPosition++)
@@ -729,6 +729,34 @@ namespace ProjectEuler
             {
                 listRepresentingNumber.Add(carryOver);
             }
+        }
+
+        private List<int> MultiplyListRepresentingNumber(List<int> listRepresentingNumber, int multiplyBy, int maxLength)
+        {
+            listRepresentingNumber = new List<int>(listRepresentingNumber);
+            int carryOver = 0;
+            for (int listPosition = 0; listPosition < Math.Min(listRepresentingNumber.Count, maxLength); listPosition++)
+            {
+                int multiplied = (listRepresentingNumber[listPosition] * multiplyBy) + carryOver;
+                if (multiplied >= 10)
+                {
+                    int factorOf10 = multiplied / 10;
+                    int remainder = multiplied % 10;
+                    listRepresentingNumber[listPosition] = remainder;
+                    carryOver = factorOf10;
+                }
+                else
+                {
+                    listRepresentingNumber[listPosition] = multiplied;
+                    carryOver = 0;
+                }
+            }
+
+            if (carryOver > 0)
+            {
+                listRepresentingNumber.Add(carryOver);
+            }
+            return listRepresentingNumber.Take(maxLength).ToList();
         }
 
         private List<int> GetAsListRepresentingNumber(int number)
@@ -771,7 +799,7 @@ namespace ProjectEuler
             {
                 List<int> mult = new List<int>(listRepresentingNumber2);
 
-                this.MultiplyListRepresentingNumber(mult, listRepresentingNumber[i]);
+                this.MultiplyListRepresentingNumberVoid(mult, listRepresentingNumber[i]);
                 for (int j = 0; j < i; j++)
                 {
                     mult.Insert(0, 0);
@@ -1147,13 +1175,530 @@ namespace ProjectEuler
         public int DigitSumEqual(int upperLimit, Func<int, int> digitMap)
         {
             var digitMapLookup = new KeyValueMap<int, int>(digitMap);
-            Func<IEnumerable<int>, int> digitSum = xs => xs.Select(x => digitMapLookup.GetValue(x)).Sum();
+            Func<IEnumerable<int>, int> digitSum = xs => xs.Select(digitMapLookup.GetValue).Sum();
             return Enumerable.Range(10, upperLimit)
                                 .Select(x => new { Num = x, ListNum = GetAsListRepresentingNumber(x) })
                                 .Where(x => x.Num == digitSum(x.ListNum))
                                 .Sum(x => x.Num);
         }
 
+        public void Coins()
+        {
+            int number = 0;
+            Action adder = () => number++;
+            int[] coins = { 1, 2 };
+            var node = new Node(coins, null, () => { }, adder, 0);
+
+        }
+
+        /*public void Coins2()
+        {
+            int targetAmount = 200;
+            int answer = 0;
+            IEnumerable<IEnumerable<int>> coins = new int[][] { 
+                                                                new int[] { 1 }, 
+                                                                new int[] { 2 },
+                                                                new int[] { 5 },
+                                                                new int[] { 10 },
+                                                                new int[] {20},
+                                                                new int[] {50},
+                                                                new int[] {100},
+                                                                new int[] {200}};
+            var toFold = Enumerable.Repeat(coins, targetAmount);
+
+
+            Func<IEnumerable<IEnumerable<int>>, IEnumerable<IEnumerable<int>>, IEnumerable<IEnumerable<int>>> hmmm = (l1, l2) => Accumulator(l1, l2, targetAmount, i => answer += i);
+            var xhg = toFold.Aggregate(hmmm);
+
+        }
+
+        private IEnumerable<IEnumerable<int>> Accumulator(IEnumerable<IEnumerable<int>> l1, IEnumerable<IEnumerable<int>> l2, int totalToFind, Action<int> adder)
+        {
+            var toReturn = l1.SelectMany(x => l2.Where(y => y.First() >= x.Last()).Select(y => x.Concat(y)));
+            adder(toReturn.Count(x => x.Sum() == totalToFind));
+            return toReturn.Where(x=> x.Sum() < totalToFind).ToList();
+
+        }*/
+
+        public void Coins2()
+        {
+            int targetAmount = 200;
+            int answer = 0;
+            IEnumerable<Tuple<int, int>> coins = (new int[] { 1, 2, 5, 10, 20, 50, 100, 200 }).Select(x => Tuple.Create(x, x));
+            var toFold = Enumerable.Repeat(coins, targetAmount);
+
+
+            Func<IEnumerable<Tuple<int, int>>, IEnumerable<Tuple<int, int>>, IEnumerable<Tuple<int, int>>> hmmm = (l1, l2) => Accumulator(l1, l2, targetAmount, i => answer += i);
+            var xhg = toFold.Aggregate(hmmm);
+
+        }
+
+        private IEnumerable<Tuple<int, int>> Accumulator(IEnumerable<Tuple<int, int>> l1, IEnumerable<Tuple<int, int>> l2, int totalToFind, Action<int> adder)
+        {
+            counter++;
+            var toReturn = l1.SelectMany(x => l2.Where(y => y.Item1 >= x.Item1).Select(y => Tuple.Create(y.Item1, x.Item2 + y.Item1)));
+            adder(toReturn.Count(x => x.Item2 == totalToFind));
+            Func<int, int, int, bool> test = (s, t, u) => s < u || ((s >= u) && ((totalToFind - t) % u) == 0);
+            return toReturn.Where(x => x.Item2 < totalToFind).Where(x => test(x.Item1, x.Item2, 5)).Where(x => test(x.Item1, x.Item2, 10)).ToList();
+
+        }
+
+        static int counter = 0;
+
+        public void Problem97()
+        {
+            var q = Enumerable.Repeat(2, 7830457);
+            var rt = q.Aggregate(Enumerable.Repeat<int>(1, 1).ToList(), (x, y) => MultiplyListRepresentingNumber(x, y, 10));
+
+            //MultiplyListRepresentingNumberVoid(rt, 28433);
+            var d = GetAsListRepresentingNumber(28433);
+
+            var s = MultiplyListRepresentingNumber(rt, d);
+
+
+        }
+
+        public void Problem99()
+        {
+            var lines = File.ReadAllLines("C:\\Phil\\prob99.txt");
+            var linesSplit = lines.Select(x => x.Split(','));
+            double valMax = 0.0;
+            //Tuple<double, double> blahhh;
+            int i = 0;
+            int maxLine = 0;
+            foreach (var splitLine in linesSplit)
+            {
+                double b = Double.Parse(splitLine[0]);
+                double index = Double.Parse(splitLine[1]);
+
+                double valTemp = index * Math.Log(b);
+                if (valTemp > valMax)
+                {
+                    valMax = valTemp;
+                    maxLine = i;
+                }
+                i++;
+            }
+        }
+
+        public IEnumerable<Tuple<T, T>> GetDiagonal<T>(IEnumerable<T> list)
+        {
+            var reversed = list.Reverse();
+            return list.Zip(reversed, Tuple.Create);
+        }
+
+        /*public void ConcealedSquare()
+        {
+            var numbers = Enumerable.Repeat(Enumerable.Range(0, 10), 10);
+            IEnumerable<IEnumerable<int>> seed = new IEnumerable<int>[] { Enumerable.Empty<int>() };
+            var test = Enumerable.Range(1, 10).Reverse().Select(w=> SpecialMod(w,10));
+            var hmm = test.Aggregate(Enumerable.Empty<int>(), (d, f) => d.Concat(ToEnumerable(0).Concat(ToEnumerable(f)))).Skip(1);
+            Func<int, bool>[] bry = hmm.Select((x, i) => SpecialMod(i, 2) == 0 ? (Func<int, bool>)(s => s == x) : h => true).ToArray();
+            int index = 0;
+            var t = numbers.Aggregate(seed, (x, i) => Agg(x, i, () => index++, bry[index]));
+            t.ToList();
+        }
+
+        private IEnumerable<IEnumerable<int>> Agg(IEnumerable<IEnumerable<int>> x, IEnumerable<int> i, Action adder, Func<int, bool> func)
+        {
+            var toReturn = x.SelectMany(y => i, (a, b) => a.Concat(ToEnumerable(b))).Where(q => func(SpecialMod(DiagSum2(q), 10))).ToList(); 
+            adder(); 
+            return toReturn; 
+        }*/
+
+        public void Problem206()
+        {
+
+            var numbers = Enumerable.Repeat(Enumerable.Range(0, 10), 10);
+            IEnumerable<IEnumerable<int>> seed = new IEnumerable<int>[] { Enumerable.Empty<int>() };
+            var seed2 = seed.Select(h => Tuple.Create(h, 0));
+            var test = Enumerable.Range(1, 10).Reverse().Select(w => SpecialMod(w, 10));
+            var hmm = test.Aggregate(Enumerable.Empty<int>(), (d, f) => d.Concat(ToEnumerable(0).Concat(ToEnumerable(f)))).Skip(1);
+            Func<int, bool>[] bry = hmm.Select((x, i) => SpecialMod(i, 2) == 0 ? (Func<int, bool>)(s => s == x) : h => true).ToArray();
+            int index = 0;
+            var t = numbers.Aggregate(seed2, (x, i) => Agg(x, i, () => index++, bry[index])).ToList();
+            /*while (index < 19)
+            {
+                var temp = t.Select(j => Tuple.Create(j.Item1, SpecialMod(DiagSum(j.Item1.Skip(index - 9)) + j.Item2, 10)));
+                t = temp.Where(z => bry[index](z.Item2)).Select(k => Tuple.Create(k.Item1, k.Item2 / 10)).ToList();
+                index++;
+            }*/
+
+            var multi = t.Select(q => Tuple.Create(MultiplyListRepresentingNumber(q.Item1.ToList(), q.Item1.ToList()), q.Item1)).ToList();
+            //multi.Where(d=> d.All(
+            multi = multi.Where(df => df.Item1.Count == 19 || (df.Item1.Count == 20 && df.Item1[19] == 0)).Select(sw => Tuple.Create(sw.Item1.Take(19).ToList(), sw.Item2)).ToList();
+            int counter = 0;
+            int maxCounter = 0;
+            foreach (var numero in multi)
+            {
+                counter = 0;
+                foreach (var numeroElement in numero.Item1)
+                {
+                    if (counter > maxCounter)
+                    {
+                        maxCounter = counter;
+                    }
+                    if (!bry[counter](numeroElement))
+                    {
+                        break;
+                    }
+                    counter++;
+                }
+                if (counter == 19)
+                {
+
+                }
+
+            }
+
+
+
+
+            Console.WriteLine(t.Count);
+        }
+
+
+        private IEnumerable<Tuple<IEnumerable<int>, int>> Agg(IEnumerable<Tuple<IEnumerable<int>, int>> x, IEnumerable<int> i, Action adder, Func<int, bool> func)
+        {
+            var temp =
+                x.SelectMany(y => i, (a, b) => Tuple.Create(a.Item1.Concat(ToEnumerable(b)), a.Item2))
+                 .Select(e => Tuple.Create(e.Item1, DiagSum(e.Item1) + e.Item2));
+            var toReturn = temp.Where(v => func(SpecialMod(v.Item2, 10))).Select(r => Tuple.Create(r.Item1, r.Item2 / 10));
+            //.Select(v => Tuple.Create(v, DiagSum(v))).Where(q => func(SpecialMod(q.Item2 + , 10))).ToList();
+            adder();
+            return toReturn;
+        }
+
+        public int DiagSum2(IEnumerable<int> line)
+        {
+            var subLine = line.Reverse().Skip(1);
+            return (DiagSum(subLine) / 10) + DiagSum(line);
+
+        }
+
+        public int DiagSum(IEnumerable<int> line)
+        {
+            return GetDiagonal(line).Select(y => y.Item1 * y.Item2).Sum();
+        }
+
+
+        private int SpecialMod(int number, int mod)
+        {
+            return number < mod ? number : number % mod;
+        }
+
+
+        private IEnumerable<T> ToEnumerable<T>(T arg)
+        {
+            yield return arg;
+        }
+
+        public int GetTriangleSection(int topLength, int depth)
+        {
+            int bigDoubleTriangle = (topLength + depth - 1) * (topLength + depth);
+            int smallDoubleTriangle = (topLength - 1) * topLength;
+            return (bigDoubleTriangle - smallDoubleTriangle) / 2;
+        }
+
+        public long NChooseK(int n, int k)
+        {
+            Func<long, long, long> mult = (x, y) => x * y;
+            long num = 1;
+            for (int i = n; i > n - k; i--)
+            {
+                num *= i;
+            }
+            long d = Convert.ToInt64(Factorial(k));
+            return num / d;
+        }
+
+        public int Problem53()
+        {
+            int counter = 4;
+            int total = 4;
+            int n = 24;
+            int k = 9;
+            while (n <= 100 && k > 0)
+            {
+                long val = NChooseK(n, k);
+                if (val > 1000000)
+                {
+                    k--;
+                    counter += 3;
+                }
+                else
+                {
+                    counter++;
+
+                }
+                total = total + counter;
+                n++;
+
+            }
+            return total;
+        }
+
+        public int Problem81()
+        {
+            int squareLength = 80;
+            /*var line1 = new List<int>() { 1, 1, 1, 1 };
+            var line2 = new List<int>() { 2, 3, 4, 1 };
+            var line3 = new List<int>() { 1, 2, 5, 1 };
+            var line4 = new List<int>() { 6, 9, 3, 1 };
+
+            var lines = new List<List<int>>() { line1, line2, line3, line4 };*/
+
+            /*var line1 = new List<int>() {131,	673,	234,	103,	18,};
+            var line2 = new List<int>() { 201,	96,	342,	965,	150};
+            var line3 = new List<int>() { 630,	803,	746,	422,	111};
+            var line4 = new List<int>() {537,	699,	497,	121,	956 };
+            var line5 = new List<int>() {805,	732,	524,	37,	331};
+
+
+            var lines = new List<List<int>>() { line1, line2, line3, line4,line5 };*/
+
+            string[] fileLines = File.ReadAllLines("C:\\Phil\\Problem81.txt");
+            var lines = fileLines.Select(l => l.Split(',').Select(x => Convert.ToInt32(x)).ToList()).ToList();
+
+
+
+
+
+            var triangle1 = new List<List<int>>();
+
+            for (int i = 0; i < squareLength; i++)
+            {
+                var triangleLine = new List<int>();
+                for (int j = 0; j < i + 1; j++)
+                {
+                    triangleLine.Add(lines[i - j][j]);
+                }
+                triangle1.Add(triangleLine);
+            }
+
+            for (int p = 1; p < squareLength; p++)
+            {
+                var triangleLine = new List<int>();
+                for (int q = 0; q < squareLength - p; q++)
+                {
+                    triangleLine.Add(lines[squareLength - 1 - q][p + q]);
+                }
+                triangle1.Add(triangleLine);
+            }
+
+            for (int i = triangle1.Count - 2; i >= 0; i--)
+            {
+                for (int j = 0; j < triangle1[i].Count; j++)
+                {
+                    if (triangle1[i + 1].Count > triangle1[i].Count)
+                    {
+                        int adder = Math.Min(triangle1[i + 1][j], triangle1[i + 1][j + 1]);
+                        triangle1[i][j] += adder;
+                    }
+                    else
+                    {
+                        int adder = 0;
+                        if (j > triangle1[i + 1].Count - 1)
+                        {
+                            adder = triangle1[i + 1][j - 1];
+                        }
+                        else if (j - 1 < 0)
+                        {
+                            adder = triangle1[i + 1][j];
+                        }
+                        else
+                        {
+                            adder = Math.Min(triangle1[i + 1][j], triangle1[i + 1][j - 1]); ;
+                        }
+
+
+                        triangle1[i][j] += adder;
+                    }
+
+                }
+            }
+            return triangle1[0][0];
+
+        }
+
+        public void Problem44()
+        {
+            int n = 0;
+            Dictionary<int, int> pentagDictionary = new Dictionary<int, int>();
+            List<Tuple<int, int>> numbersToCheck = new List<Tuple<int, int>>();
+            int minDifference = 0;
+            bool foundOne = false;
+            while (true)
+            {
+                int pent = (n * ((3 * n) - 1)) / 2;
+                pentagDictionary.Add(n, pent);
+
+
+
+                var maybe = numbersToCheck.Where(x => pentagDictionary[x.Item1] + pentagDictionary[x.Item2] == pent);
+                if (maybe.Count() > 0)
+                {
+                    minDifference = maybe.Min(x => pentagDictionary[x.Item1] - pentagDictionary[x.Item2]);
+                    foundOne = true;
+
+                }
+                numbersToCheck = numbersToCheck.Where(x => pentagDictionary[x.Item1] + pentagDictionary[x.Item2] > pent).ToList();
+
+
+                if (foundOne && (pent - pentagDictionary[n - 1] > minDifference))
+                {
+                    break;
+                }
+                for (int i = n - 1; i >= 1; i--)
+                {
+
+                    int diff = pent - pentagDictionary[i];
+                    if (pentagDictionary.ContainsValue(diff))
+                    {
+                        numbersToCheck.Add(Tuple.Create(n, i));
+                    }
+                    /*bool breakMe = false;
+                    for (int j = n - 2; j >= 0; j--)
+                    {
+                        int sum = pentagDictionary[i] + pentagDictionary[j];
+                        if (sum >= pent)
+                        {
+                            numbersToCheck.Add(Tuple.Create(i, j));
+                        }
+                        else
+                        {
+                            breakMe = true;
+                            break;
+                        }
+                    }
+                    if (breakMe)
+                    {
+                        break;
+                    }*/
+
+                }
+
+                n++;
+            }
+        }
+
+        public void Pentagonal2()
+        {
+
+            int m = 2;
+            while (true)
+            {
+                int x = 2;
+                while (x < m)
+                {
+                    int numerator = (6 * m * m) - (2 * m) - (3 * x * x) - x;
+                    int denominator = (6 * x);
+
+                    if (numerator % denominator == 0)
+                    {
+                        break;
+                    }
+                    x++;
+                }
+                m++;
+            }
+        }
+
+        public void Pentagonal3()
+        {
+            int x = 1;
+            int n = 1;
+            int m = 1;
+
+
+            int numerator = (3 * x * x) + (6 * m * x) - x + m - (3 * m * m);
+            int denominator = n;
+            int denominator2 = (3 * n) - 1;
+
+            while (true)
+            {
+                m = 1;
+                while (m < x)
+                {
+                    n = 1;
+                    while (n < x)
+                    {
+                        if ((numerator % denominator == 0) && (numerator % denominator2 == 0))
+                        {
+                            break;
+                        }
+                        n++;
+                    }
+                    m++;
+                }
+                x++;
+            }
+
+        }
+
+
+    }
+
+    public class Node
+    {
+        Node Parent { get; set; }
+        int currentChild;
+        int PathCost { get; set; }
+        private List<Node> childNodes = new List<Node>();
+        private List<int> childNumbers;
+        private Action adder;
+
+        public void AddNextChild()
+        {
+            if (currentChild == this.childNumbers.Count())
+            {
+                if (this.Parent != null)
+                {
+                    this.Parent.AddNextChild();
+                }
+                else
+                {
+                }
+            }
+            else
+            {
+                //int parentPathCost = this.Parent == null ? 0 : this.Parent.PathCost;
+                var newPathCost = this.PathCost + childNumbers[currentChild];
+                this.childNodes.Add(new Node(childNumbers.Skip(currentChild), this, () => currentChild++, adder, newPathCost));
+            }
+
+        }
+
+
+        public Node(IEnumerable<int> children, Node parent, Action advance, Action adder, int pathCost)
+        {
+            advance();
+            this.Parent = parent;
+            this.PathCost = pathCost;
+            this.childNumbers = new List<int>(children);
+            this.adder = adder;
+            if (PathCost > 50)
+            {
+                if (this.Parent != null)
+                {
+                    this.Parent.AddNextChild();
+                }
+
+            }
+            else if (PathCost == 50)
+            {
+
+                if (this.Parent != null)
+                {
+                    this.Parent.AddNextChild();
+                }
+                adder();
+            }
+            else
+            {
+                this.AddNextChild();
+            }
+        }
     }
 
     public class KeyValueMap<S, T>
