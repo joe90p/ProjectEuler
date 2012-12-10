@@ -9,177 +9,9 @@ namespace ProjectEuler
 {
     public class ProjectEuler
     {
-        public int Problem1()
-        {
-            int result = 0;
-            for (int i = 0; i < 1000; i++)
-            {
-                if (i % 3 == 0 || i % 5 == 0)
-                {
-                    result = result + i;
-                }
-            }
-            return result;
-        }
+        
 
-        public int Problem2()
-        {
-            int result = 0;
-            int num1 = 1;
-            int num2 = 0;
-            int buffer = 0;
-            while (num1 <= 4000000)
-            {
-                if (num1 % 2 == 0)
-                {
-                    result = result + num1;
-                }
-                buffer = num1;
-                num1 = num1 + num2;
-                num2 = buffer;
-
-            }
-            return result;
-        }
-
-        public long Problem3()
-        {
-            long number = 600851475143;
-            List<long> primes = new List<long>();
-            for (long i = 2; i <= Math.Pow(number, 0.5); i++)
-            {
-                if (number % i == 0)
-                {
-                    long otherDivisor = number / i;
-                    if (this.IsPrime(i))
-                    {
-                        primes.Add(i);
-                    }
-                    else
-                    {
-                        if (this.IsPrime(otherDivisor))
-                        {
-                            return otherDivisor;
-                        }
-                    }
-                }
-            }
-
-            primes.Reverse();
-
-            return primes[0];
-        }
-
-        public int Problem4()
-        {
-            List<int> palindromes = new List<int>();
-            int num = 999;
-            for (int i = num; i >= 100; i--)
-            {
-                for (int j = i; j >= 100; j--)
-                {
-                    if (IsPalindrome(j * i))
-                    {
-                        palindromes.Add(j * i);
-                    }
-                }
-            }
-            palindromes.Sort();
-            palindromes.Reverse();
-            return palindromes[0];
-        }
-
-        public int Problem6()
-        {
-            int result = 0;
-            int number = 100;
-            for (int i = 1; i <= number; i++)
-            {
-                for (int j = i + 1; j <= number; j++)
-                {
-                    result = result + (i * j);
-                }
-            }
-            return (2 * result);
-        }
-
-        public int Problem7()
-        {
-            return this.TheNthPrimeIs(10001);
-        }
-
-        public int Problem8()
-        {
-            int biggestProduct = 0;
-
-            string number = "7316717653133062491922511967442657474235534919493496983520312774506326239578318016984801869478851843858615607891129494954595017379583319528532088055111254069874715852386305071569329096329522744304355766896648950445244523161731856403098711121722383113622298934233803081353362766142828064444866452387493035890729629049156044077239071381051585930796086670172427121883998797908792274921901699720888093776657273330010533678812202354218097512545405947522435258490771167055601360483958644670632441572215539753697817977846174064955149290862569321978468622482839722413756570560574902614079729686524145351004748216637048440319989000889524345065854122758866688116427171479924442928230863465674813919123162824586178664583591245665294765456828489128831426076900422421902267105562632111110937054421750694165896040807198403850962455444362981230987879927244284909188845801561660979191338754992005240636899125607176060588611646710940507754100225698315520005593572972571636269561882670428252483600823257530420752963450";
-            for (int i = 0; i <= number.Length - 5; i++)
-            {
-                int currentProduct = 1;
-                for (int j = 0; j < 5; j++)
-                {
-                    currentProduct = currentProduct * Int32.Parse(number[i + j].ToString());
-                }
-                if (currentProduct > biggestProduct)
-                {
-                    biggestProduct = currentProduct;
-                }
-            }
-
-            return biggestProduct;
-        }
-
-        public int Problem9()
-        {
-            for (int c = 0; c < 500; c++)
-            {
-                int aPlusB = 1000 - c;
-                if (aPlusB <= 500)
-                {
-                    break;
-                }
-                else
-                {
-                    int product;
-                    if (IsPythagoreanTriplet(aPlusB, c, out product))
-                    {
-                        return product;
-                    }
-                }
-            }
-            return 0;
-        }
-
-        private bool IsPythagoreanTriplet(int aPlusB, int c, out int product)
-        {
-            product = 0;
-            for (int a = 1; aPlusB - a >= a; a++)
-            {
-                int b = aPlusB - a;
-                if (b - a <= 500)
-                {
-                    if ((a * a) + (b * b) == (c * c))
-                    {
-                        product = a * b * c;
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-
-        public long Problem10()
-        {
-            long primeSum = 0;
-            for (long i = 3; i < 2000000; i = i + 2)
-            {
-                if (IsPrime(i))
-                {
-                    primeSum = primeSum + i;
-                }
-            }
-            return primeSum + 2;
-        }
+        
 
         public void ProblemEleven()
         {
@@ -625,85 +457,7 @@ namespace ProjectEuler
 
         }
 
-        private bool IsPalindrome(int pal)
-        {
-            int factor = 0;
-            int maxPower = 7;
-            bool palindromeSet = false;
-            int[] palindrome = new int[1];
-            int j = 0;
-
-            for (int i = maxPower; i >= 0; i--)
-            {
-                factor = (pal / Power(10, i));
-                if (!palindromeSet && factor > 0)
-                {
-                    palindromeSet = true;
-                    palindrome = new int[i + 1];
-                }
-                if (palindromeSet)
-                {
-                    palindrome[j] = factor;
-                    j++;
-                }
-                pal = pal - (factor * Power(10, i));
-            }
-            return IsPalindrome(palindrome);
-        }
-
-        private bool IsPalindrome(int[] pal)
-        {
-            int i = 0;
-            for (i = 0; i < pal.Length / 2; i++)
-            {
-                if (pal[i] != pal[pal.Length - 1 - i])
-                {
-                    break;
-                }
-            }
-            if (i >= pal.Length / 2)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public int Power(int exponent, int index)
-        {
-            int result = 1;
-            for (int i = 0; i < index; i++)
-            {
-                result = result * exponent;
-            }
-            return result;
-        }
-
-        private bool IsPrime(long numberToTest)
-        {
-            if (numberToTest == 1)
-            {
-                return false;
-            }
-            if (numberToTest == 2)
-            {
-                return true;
-            }
-            if (numberToTest % 2 == 0)
-            {
-                return false;
-            }
-            for (int j = 3; j <= Math.Pow(numberToTest, 0.5); j = j + 2)
-            {
-                if (numberToTest % j == 0)
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
+        
 
         private void MultiplyListRepresentingNumberVoid(List<int> listRepresentingNumber, int multiplyBy)
         {
@@ -869,21 +623,6 @@ namespace ProjectEuler
             return result;
         }
 
-        public int TheNthPrimeIs(int whichNumerPrime)
-        {
-            int i = 1;
-            int numberToTest = 3;
-            while (i < whichNumerPrime)
-            {
-                if (this.IsPrime(numberToTest))
-                {
-                    i++;
-                }
-                numberToTest++;
-            }
-            return numberToTest - 1;
-        }
-
         private int Factorial(int n)
         {
             return n <= 1 ? 1 : n * this.Factorial(n - 1);
@@ -907,7 +646,7 @@ namespace ProjectEuler
                         long quadValue = this.GetQuadraticValue(aValue, bValue, 0);
                         if (!isPrimeDict.ContainsKey(quadValue))
                         {
-                            bool isPrime = this.IsPrime(quadValue);
+                            bool isPrime = MathsHelper.IsPrime(quadValue);
                             isPrimeDict.Add(quadValue, isPrime);
                         }
                         if (isPrimeDict[quadValue])
@@ -940,7 +679,7 @@ namespace ProjectEuler
                 var q = ApplyPartial(h, kvp.Key);
                 foreach (var r in kvp.Value)
                 {
-                    IEnumerable<int> th = new int[] { Increase(r, p), Increase(r, q), Increase(r, q) + Power(2, kvp.Key + 1) };
+                    IEnumerable<int> th = new int[] { Increase(r, p), Increase(r, q), Increase(r, q) + MathsHelper.Power(2, kvp.Key + 1) };
                     foreach (var x in th)
                     {
                         if (valid(x))
@@ -974,7 +713,7 @@ namespace ProjectEuler
             int result = 0;
             foreach (int i in t)
             {
-                result += Power(2, i);
+                result += MathsHelper.Power(2, i);
             }
             return result;
         }
@@ -1062,7 +801,7 @@ namespace ProjectEuler
 
             //primes.
 
-            Func<IEnumerable<int>, int> getNumber = list => list.Reverse().Select((i, j) => i * Power(10, j)).Sum();
+            Func<IEnumerable<int>, int> getNumber = list => list.Reverse().Select((i, j) => i * MathsHelper.Power(10, j)).Sum();
             Func<IEnumerable<int>, IEnumerable<IEnumerable<int>>> getRLSubsets = list => list.Select((i, j) => list.Skip(j));
 
             truncatable.Add(1, new int[][] { new int[] { 2 }, new int[] { 3 }, new int[] { 5 }, new int[] { 7 } });
@@ -1071,8 +810,8 @@ namespace ProjectEuler
             for (int q = 2; q < 20; q++)
             {
                 truncatable[q] = truncatable[q - 1].SelectMany(p => choices, (r, t) => r.Concat(t));
-                truncatable[q] = truncatable[q].Where(x => IsPrime((long)getNumber(x))).ToList();
-                truncatable[q - 1] = truncatable[q - 1].Where(x => getRLSubsets(x).Select(getNumber).All(y => IsPrime((long)y)));
+                truncatable[q] = truncatable[q].Where(x => MathsHelper.IsPrime((long)getNumber(x))).ToList();
+                truncatable[q - 1] = truncatable[q - 1].Where(x => getRLSubsets(x).Select(getNumber).All(y => MathsHelper.IsPrime((long)y)));
                 if (truncatable[q - 1].Count() == 0)
                 {
                     truncatable[q] = new List<IEnumerable<int>>();
@@ -1161,7 +900,7 @@ namespace ProjectEuler
         /// </summary>
         public void Problem34()
         {
-            var answer = DigitSumEqual(Power(10, 7), this.Factorial);
+            var answer = DigitSumEqual(MathsHelper.Power(10, 7), this.Factorial);
         }
 
         /// <summary>
@@ -1169,7 +908,7 @@ namespace ProjectEuler
         /// </summary>
         public void Problem30()
         {
-            var answer = DigitSumEqual(Power(10, 6), x => Power(x, 5));
+            var answer = DigitSumEqual(MathsHelper.Power(10, 6), x => MathsHelper.Power(x, 5));
         }
 
         public int DigitSumEqual(int upperLimit, Func<int, int> digitMap)
