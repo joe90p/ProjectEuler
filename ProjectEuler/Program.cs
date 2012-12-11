@@ -11,7 +11,7 @@ namespace ProjectEuler
         static void Main(string[] args)
         {
             Problems p = new Problems();
-            long r = p.Problem10(); 
+            int r = p.Problem6();
         }
     }
 }

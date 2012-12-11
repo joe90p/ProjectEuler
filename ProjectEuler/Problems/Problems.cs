@@ -48,24 +48,16 @@ namespace ProjectEuler
 
         public int Problem4()
         {
-            List<int> palindromes = new List<int>();
-            int num = 999;
-            for (int i = num; i >= 100; i--)
-            {
-                for (int j = i; j >= 100; j--)
-                {
-                    if (SequenceHelper.IsPalindrome(j * i))
-                    {
-                        palindromes.Add(j * i);
-                    }
-                }
-            }
-            palindromes.Sort();
-            palindromes.Reverse();
-            return palindromes[0];
+            var list = Enumerable.Range(100, 900).ToList();
+            return list.SelectMany(x => list, (x, y) => x*y).Where(SequenceHelper.IsPalindrome).Max();
         }
 
         public int Problem6()
+        {
+            return Enumerable.Range(1, 100).SelectMany(x => SequenceHelper.GetRange(x + 1, 100 - x), (x, y) => x * y).Sum() * 2;
+        }
+
+        public int Problem6Alternative()
         {
             int result = 0;
             int number = 100;

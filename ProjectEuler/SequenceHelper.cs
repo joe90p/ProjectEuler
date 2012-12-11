@@ -52,5 +52,13 @@ namespace ProjectEuler
                 return false;
             }
         }
+
+        public static IEnumerable<int> GetRange(int min, int count)
+        {
+            for (int i = min; i <= min + count - 1; i++)
+            {
+                yield return i;
+            }
+        }
     }
 }
