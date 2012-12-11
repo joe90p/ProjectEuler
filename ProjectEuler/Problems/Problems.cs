@@ -73,6 +73,7 @@ namespace ProjectEuler
 
         public int Problem7()
         {
+            MathsHelper.GetPrimes(2000000).ElementAt()
             return this.TheNthPrimeIs(10001);
         }
 
