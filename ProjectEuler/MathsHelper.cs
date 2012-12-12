@@ -79,7 +79,7 @@ namespace ProjectEuler
             }
         }
 
-        public static IEnumerable<int> GetPrimes(int limit)
+        public static IEnumerable<int> GetPrimesUpTo(int limit)
         {
             int start = 2;
             BitArray compositeArray = new BitArray(limit - start + 1, true);
@@ -96,28 +96,6 @@ namespace ProjectEuler
                     yield return i;
                 }
             }
-        }
-
-        public static IEnumerable<int> GetPrimes(int number, bool limited)
-        {
-            int start = 2;
-            BitArray compositeArray = new BitArray(limit - start + 1, true);
-            //for (int i = start; i <= limit; i++)
-            //{
-            int i = start;
-            {
-                if (compositeArray[i - start])
-                {
-                    int x = i;
-                    while (x <= limit)
-                    {
-                        compositeArray[x - start] = false;
-                        x += i;
-                    }
-                    yield return i;
-                }
-            }
-            //}
         }
     }
 }

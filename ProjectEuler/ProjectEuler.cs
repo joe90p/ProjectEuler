@@ -797,7 +797,7 @@ namespace ProjectEuler
             var truncatable = new Dictionary<int, IEnumerable<IEnumerable<int>>>();
             IEnumerable<IEnumerable<int>> choices = new int[][] { new int[] { 1 }, new int[] { 3 }, new int[] { 7 }, new int[] { 9 } };
             var tailElements = new HashSet<int>(new int[] { 3, 7 });
-            //var primes = new HashSet<int>(GetPrimes(1000000000));
+            //var primes = new HashSet<int>(GetPrimesUpTo(1000000000));
 
             //primes.
 
