@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IEnumerableExtension.cs" />
     <Compile Include="MathsHelper.cs" />
     <Compile Include="Problems\Problems.cs" />
     <Compile Include="ProjectEuler.cs" />
