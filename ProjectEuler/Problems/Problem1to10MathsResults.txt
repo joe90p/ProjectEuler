@@ -84,12 +84,100 @@ for any natural numbers m,n will produce a pythagorean triple. This is evident b
 a^2 + b^2 = c^2
 
 Theorem 
-A Pythagorean triplet is primitive if and only if m and n are coprimes and exactly one of them is even.
+A Pythagorean triplet is primitive if and only if m and n are coprime and exactly one of them is even.
 
 
 Proof:
-=>
-If a Pythgorean triplet is primitive then m and n are coprimes and exactly one of them is even.
+
+We shall use the following substitutions for the statements
+X=Pythagorean triplet is primitive
+Y = m,n coprime
+Z = exactly one of m,n is even
+
+Proof of X => Y AND Z
+
+We shall show that the logically equivalent ~Y OR ~Z => ~X is true.
+
+Assume that gcd(n,m)= d > 1 then there exists p,q such that m=p*d and n=q*d substitutin the into the value fors a,b,c we see that
+a=d^2(p^2 - q^2) 
+b=2*d^2*m*n
+c=d^2(p^2 - q^2) 
+
+We see that d^2 is a divisor of a,b,c and therefore the triplet is not primitive. Therefore ~Y => ~X
+
+If both n and m are odd (or both even) then a,b and c are even (this can be seens by plugging in the values for m and n in the equations for a,b,c), 
+and thus 2 is a common divisor. Therefore ~Z => ~X
+
+Therefore ~Y OR ~Z => ~X
+
+Proof of Y AND Z => X
+
+Consider the truth table
+
+Y     Z     X     Y AND Z=>X
+
+T     T     T     T
+T     T     F     F
+T     F     T     T
+T     F     F     T
+F     T     T     T
+F     T     F     T
+F     F     T     T
+F     F     F     T
+
+(For a nice description of truth tables see http://www.people.vcu.edu/~rhammack/BookOfProof/)
+
+Suppose that Y AND Z=>X is false, from the above we can see that this must mean that Y and Z are true and X is false.
+
+However it can also be shown that ~X AND Z=>~Y 
+
+Since the triplet is not primitive a prime p is divisible with a, b and c. From the condition that exactly one of m and n is odd, 
+it follows that a and c are also odd and b is odd, therefore a prime p dividing a,b and c will be odd.
+Any odd prime that divides b must also divide m and/or n, without loss of generality assume that it divides m. 
+Thus it must also divide m^2. Since the prime is also a divisor of c = m^2 + n^2, then it follows that it must divide n^2 and n as well. 
+(this follows from notions and facts part of the divisor article on wikipedia) Therefore p is a divisor of m and n, and therefore m and n are not 
+coprimes. ie  ~X AND Z=>~Y.
+
+
+
+Therefore Y is true and false, which is absurd, therefore what we originally supposed
+is wrong therefore Y AND Z=>X is true. 
+
+Theorem:
+A coprime pair m,n with exactly one even represents a unique primitive Pythagorean triplet.
+
+a=m1^2 - n1^2 = m2^2 - n2^2
+b=2*m1*n1 = 2*m2*n2
+c=m1^2 + n1^2 = m2^2 + n2^2
+
+
+From b 
+n2 = m1n1/m2 
+m2 = m1n1/n2
+
+implies that either m1/m2 or n1/m2
+AND
+either m1/n2 or n1/n2
+
+ie 1. (m1/m2 AND m1/n2) OR 2. (m1/m2 AND n1/n2) OR 3. (n1/m2 AND m1/n2) OR 4. (n1/m2 AND n1/n2)
+
+If m1 was odd, m2 was odd
+
+1. not possible
+2. let m1 = s*m2 and n1= t*n2
+
+from c (s^2 * m2^2) +(t^2 *n2^2) = m2^2 + n2^2
+implies s^2 - 1 = 0 and t^2 - 1 = 0
+which implies that s and t are 1 but we assumed m1 did not equal m2 and n1 did not equal n2. So we have reduced to an absurdity
+
+3. not possible
+4. not possible
+
+
+
+
+
+
 
 
 
