@@ -155,7 +155,7 @@ a=m1^2 - n1^2 = m2^2 - n2^2
 b=2*m1*n1 = 2*m2*n2
 c=m1^2 + n1^2 = m2^2 + n2^2
 
-
+The equation for b
 implies that either m1/m2 or n1/m2
 AND
 either m1/n2 or n1/n2
@@ -184,11 +184,8 @@ Therefore the original assertion was wrong.
 
 Using the results above we can now say
 
-Using the results above we can now say
-
 Result
 
-Theorem:
 All pythagorean triples can be represented uniquely by d,m,n where d is any number in N and m,n are coprime with exactly one even.
 
 
