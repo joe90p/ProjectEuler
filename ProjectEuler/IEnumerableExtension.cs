@@ -22,5 +22,13 @@ namespace ProjectEuler
         {
             return list.Aggregate(1, (x, y) => x*y);
         }
+
+        public static void ForEach<T>(this IEnumerable<T> list, Action<T> action)
+        {
+            foreach (var t in list)
+            {
+                action(t);
+            }
+        }
     }
 }

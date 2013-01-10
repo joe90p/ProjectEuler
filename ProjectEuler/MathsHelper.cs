@@ -97,5 +97,20 @@ namespace ProjectEuler
                 }
             }
         }
+
+        public static int gcd(int a, int b)
+        {
+            bool agreaterThanb = a > b;
+            int y = agreaterThanb ? b : a;
+            int x = agreaterThanb ? a : b;
+
+            while (x % y != 0)
+            {
+                int temp = x;
+                x = y;
+                y = temp % x;
+            }
+            return y;
+        }
     }
 }

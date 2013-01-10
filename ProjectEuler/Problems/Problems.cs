@@ -57,20 +57,6 @@ namespace ProjectEuler
             return Enumerable.Range(1, 100).SelectMany(x => SequenceHelper.GetRange(x + 1, 100 - x), (x, y) => x * y).Sum() * 2;
         }
 
-        public int Problem6Alternative()
-        {
-            int result = 0;
-            int number = 100;
-            for (int i = 1; i <= number; i++)
-            {
-                for (int j = i + 1; j <= number; j++)
-                {
-                    result = result + (i * j);
-                }
-            }
-            return (2 * result);
-        }
-
         public int Problem7()
         {
             return this.TheNthPrimeIs(10001);
@@ -89,6 +75,75 @@ namespace ProjectEuler
                                       });
 
             return biggestProduct;
+        }
+
+        public int Problem9()
+        {
+            int s = 1000;
+            int mlimit = (int)Math.Sqrt(s / 2);
+            var range = Enumerable.Range(2, mlimit - 2);
+
+            Func<int, Tuple<bool,int>> action = m =>
+            {
+                if ((s / 2) % m == 0)
+                {
+                    int k = m % 2 == 0 ? m + 1 : m + 2;
+                    while (k < 2 * m && k <= s / (2 * m))
+                    {
+                        if (s / (2 * m) % k == 0 && MathsHelper.gcd(k, m) == 1)
+                        {
+                            int n = k - m;
+                            int d = s/(2*m*k);
+                            return Tuple.Create(true, MathsHelper.Power(d, 3) * 
+                                                        ((m*m) - (n*n)) *
+                                                        (2 * m * n) *
+                                                        ((m*m) + (n*n)));
+                        }
+                        k += 2;
+                    }
+                }
+                return Tuple.Create(false, 0);
+            };
+
+            return range.Select(action).First(x => x.Item1).Item2;
+
+        } 
+
+        public long Problem10()
+        {
+            Func<long,int,long> func = (l,i) => l+i;
+            return MathsHelper.GetPrimesUpTo(2000000).Aggregate(0, func); 
+        }
+
+        public int TheNthPrimeIs(int whichNumerPrime)
+        {
+            int i = 1;
+            int numberToTest = 3;
+            while (i < whichNumerPrime)
+            {
+                if (MathsHelper.IsPrime(numberToTest))
+                {
+                    i++;
+                }
+                numberToTest++;
+            }
+            return numberToTest - 1;
+        }
+
+        #region Alternatives
+
+        public int Problem6Alternative()
+        {
+            int result = 0;
+            int number = 100;
+            for (int i = 1; i <= number; i++)
+            {
+                for (int j = i + 1; j <= number; j++)
+                {
+                    result = result + (i * j);
+                }
+            }
+            return (2 * result);
         }
 
         public int Problem8Alternative()
@@ -112,7 +167,7 @@ namespace ProjectEuler
             return biggestProduct;
         }
 
-        public int Problem9()
+        public int Problem9Alternative()
         {
             for (int c = 0; c < 500; c++)
             {
@@ -151,25 +206,6 @@ namespace ProjectEuler
             return false;
         }
 
-        public long Problem10()
-        {
-            Func<long,int,long> func = (l,i) => l+i;
-            return MathsHelper.GetPrimesUpTo(2000000).Aggregate(0, func); 
-        }
-
-        public int TheNthPrimeIs(int whichNumerPrime)
-        {
-            int i = 1;
-            int numberToTest = 3;
-            while (i < whichNumerPrime)
-            {
-                if (MathsHelper.IsPrime(numberToTest))
-                {
-                    i++;
-                }
-                numberToTest++;
-            }
-            return numberToTest - 1;
-        }
+        #endregion
     }
 }
