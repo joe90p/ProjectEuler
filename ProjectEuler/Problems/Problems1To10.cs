@@ -109,28 +109,6 @@ namespace ProjectEuler
 
         } 
 
-        public void Problem39()
-        {
-            //generate coprime m,n with exactly one m,n even
-            int m = 2;
-            int n = 1;
-            int s = 1000;
-            int mlimit = (int)Math.Sqrt(s / 2);
-
-            var count = new Dictionary<int, int>();
-
-            while (m <= 1000)
-            {
-                n = m%2==0 ? 1 : 2;
-                while (n < m)
-                {
-                    if(MathsHelper.gcd(m,n)==1)
-                    n+=2;
-                }
-                m++;
-            }
-        }
-
         public long Problem10()
         {
             Func<long,int,long> func = (l,i) => l+i;
