@@ -112,5 +112,21 @@ namespace ProjectEuler
             }
             return y;
         }
+
+        public static IEnumerable<int> GetFactors(int n)
+        {
+            yield return 1;
+            int count = 0;
+            bool squareFlag = false;
+            int upperLimit = (int)Math.Ceiling(Math.Sqrt((double)n));
+            for (int x = 2; x <= upperLimit; x++)
+            {
+                if (n % x == 0)
+                {
+                    yield return x;
+                    yield return n/x;
+                }
+            }
+        }
     }
 }
