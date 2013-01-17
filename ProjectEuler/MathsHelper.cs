@@ -128,5 +128,48 @@ namespace ProjectEuler
                 }
             }
         }
+
+
+        public static IEnumerable<Tuple<int, int>> GetPythagTriplePerimeterCount(int upToPerimeter)
+        {
+            var perimetersOfPrimitivePythagoreanTriplets = GetPerimetersOfPrimitivePythagoreanTriplets(upToPerimeter).
+                Select(x => GetAllMultiplesUpTo(x, upToPerimeter)).
+                SelectMany(x => x).
+                GroupBy(x => x);
+            return perimetersOfPrimitivePythagoreanTriplets.Select(x => Tuple.Create(x.Key, x.Count()));
+        }
+
+        private static IEnumerable<int> GetAllMultiplesUpTo(int x, int upTo)
+        {
+            int i = 1;
+            while (i * x < upTo)
+            {
+
+                yield return i * x;
+                i++;
+            }
+        }
+
+        private static IEnumerable<int> GetPerimetersOfPrimitivePythagoreanTriplets(int s)
+        {
+            //generate coprime m,n with exactly one m,n even
+            int m = 2;
+            int n = 1;
+            int mlimit = (int)Math.Sqrt(s / 2);
+
+            while (m <= mlimit)
+            {
+                n = m % 2 == 0 ? 1 : 2;
+                while (n < m)
+                {
+                    if (MathsHelper.gcd(m, n) == 1)
+                    {
+                        yield return (2 * m * (m + n));
+                    }
+                    n += 2;
+                }
+                m++;
+            }
+        }
     }
 }

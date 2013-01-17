@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace ProjectEuler
 {
-    class Program
+    public partial class Problems
     {
-        static void Main(string[] args)
+        public int Problem75()
         {
-            Problems p = new Problems();
-            p.Problem39();
+            return MathsHelper.GetPythagTriplePerimeterCount(1500000).
+                Count(x => x.Item2 == 1);
         }
     }
 }
