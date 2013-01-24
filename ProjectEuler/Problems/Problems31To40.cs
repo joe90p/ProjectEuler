@@ -37,5 +37,14 @@ namespace ProjectEuler
             int answer = Int32.Parse(f.ToString()[index].ToString());
             return answer;
         }
+
+        //not mathematical
+        public int Problem40Alternative()
+        {
+            var t = Enumerable.Range(1, 1000000).SelectMany(x => x.ToString()).ToArray();
+            var indexes = Enumerable.Range(0, 7).Select(x => MathsHelper.Power(10, x));
+            return indexes.Select(x => Int32.Parse(t[x - 1].ToString())).Product();
+
+        }
     }
 }
