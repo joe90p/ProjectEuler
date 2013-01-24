@@ -16,15 +16,15 @@ namespace ProjectEuler
 
         public int Problem40()
         {
-            /*
-            int x = 100;
+            
+            int x = 1000000;
 
             int mult = 1;
             int start = 9;
             int oldStart = start;
             while (x > start)
             {
-                int thing = start * MathsHelper.Power(10, mult);
+                int thing = 9 * MathsHelper.Power(10, mult);
                 mult++;
                 oldStart = start;
                 start = start + (thing*mult);
@@ -35,13 +35,7 @@ namespace ProjectEuler
             int index = num%mult;
 
             int answer = Int32.Parse(f.ToString()[index].ToString());
-            */
-
-            //not mathematical
-            var t = Enumerable.Range(1, 1000000).SelectMany(x => x.ToString()).ToArray();
-            var indexes = Enumerable.Range(0, 7).Select(x => MathsHelper.Power(10, x));
-            return indexes.Select(x => Int32.Parse(t[x - 1].ToString())).Product();
-
+            return answer;
         }
     }
 }
