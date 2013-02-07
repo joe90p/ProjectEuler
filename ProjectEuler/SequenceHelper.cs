@@ -61,6 +61,11 @@ namespace ProjectEuler
             }
         }
 
+        public static IEnumerable<T> ToEnumerable<T>(T thing)
+        {
+            return new T[]{thing};
+        }
+
         
     }
 }

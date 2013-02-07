@@ -11,7 +11,7 @@ namespace ProjectEuler
         static void Main(string[] args)
         {
             Problems p = new Problems();
-            p.Problem40();
+            p.GetPerms();
         }
     }
 }

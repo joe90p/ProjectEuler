@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,11 +8,27 @@ namespace ProjectEuler
 {
     public partial class Problems
     {
+        public void Problem32()
+        {
+            var f = Enumerable.Repeat(Enumerable.Range(1, 9), 9);
+            //f.Aggregate(Enumerable.Empty<IEnumerable<int>>(), (x,y) => x.SelectMany(x => y, (a,b) => a.Contai) )
+
+        }
         public int Problem39()
         {
             return MathsHelper.GetPythagTriplePerimeterCount(1000).
                 OrderByDescending(x => x.Item2).
                 First().Item1;
+        }
+
+        public void GetPerms()
+        {
+            var x = Enumerable.Repeat(Enumerable.Empty<int>(), 1);
+            for(int i = 1; i < 10; i++)
+            {
+                x = x.Select(r => r.SelectMany(r => Enumerable.Range(1, 9)) r.Concat(.Where(y => !r.Contains(y))));
+                
+            }
         }
 
         public int Problem40()
