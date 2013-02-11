@@ -8,27 +8,54 @@ namespace ProjectEuler
 {
     public partial class Problems
     {
-        public void Problem32()
-        {
-            var f = Enumerable.Repeat(Enumerable.Range(1, 9), 9);
-            //f.Aggregate(Enumerable.Empty<IEnumerable<int>>(), (x,y) => x.SelectMany(x => y, (a,b) => a.Contai) )
 
+        public int Problem32()
+        {
+            return this.GetPerms(9).ToList().Select(ProductSum).SelectMany(x => x).Distinct().Sum();
+        }
+
+        public IEnumerable<int> ProductSum(IEnumerable<int> l)
+        {
+            for(int i = 0; i < 9; i++)
+            {
+                for (int j = i + 1; j < 9; j++)
+                {
+                    var num1 = MathsHelper.ConvertToDecimal(l.Take(i + 1));
+                    var num2 = MathsHelper.ConvertToDecimal(l.Where((x, ix) => (ix > i) && ix <= j));
+                    var eq = MathsHelper.ConvertToDecimal(l.Skip(j + 1));
+                    if(num1 * num2 == eq)
+                    {
+                        yield return eq;
+                    }
+
+                }
+            }
+        }
+        public IEnumerable<IEnumerable<int>> GetPerms(int n)
+        {
+            var range = Enumerable.Range(1, n).Select(x => x.ToEnumerable());
+            return range.Aggregate(Enumerable.Repeat(Enumerable.Empty<int>(), 1), PermAggregate);
+
+        }
+
+        IEnumerable<IEnumerable<int>> PermAggregate(IEnumerable<IEnumerable<int>> list, IEnumerable<int> toConcat)
+        {
+            foreach(var x in list)
+            {
+                var f = x.ToList();
+                var i = 0;
+                do
+                {
+                    yield return f.Take(i).Concat(toConcat).Concat(f.Skip(i));
+                    i++;
+                } while (i <= f.Count());
+            }
         }
         public int Problem39()
         {
             return MathsHelper.GetPythagTriplePerimeterCount(1000).
                 OrderByDescending(x => x.Item2).
                 First().Item1;
-        }
-
-        public void GetPerms()
-        {
-            var x = Enumerable.Repeat(Enumerable.Empty<int>(), 1);
-            for(int i = 1; i < 10; i++)
-            {
-                x = x.Select(r => r.SelectMany(r => Enumerable.Range(1, 9)) r.Concat(.Where(y => !r.Contains(y))));
-                
-            }
         }
 
         public int Problem40()
@@ -61,7 +88,6 @@ namespace ProjectEuler
             var t = Enumerable.Range(1, 1000000).SelectMany(x => x.ToString()).ToArray();
             var indexes = Enumerable.Range(0, 7).Select(x => MathsHelper.Power(10, x));
             return indexes.Select(x => Int32.Parse(t[x - 1].ToString())).Product();
-
         }
     }
 }

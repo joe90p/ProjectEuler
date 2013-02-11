@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ProjectEuler
+
 {
-    class Program
+    public partial class Problems
     {
-        static void Main(string[] args)
+        public void Problem41()
         {
-            var p = new Problems();
-            var d =p.Problem32();
+
         }
     }
 }

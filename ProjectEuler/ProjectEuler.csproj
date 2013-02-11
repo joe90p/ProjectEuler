@@ -47,6 +47,7 @@
     <Compile Include="Problems\Problems1To10.cs" />
     <Compile Include="Problems\Problems21to30.cs" />
     <Compile Include="Problems\Problems31To40.cs" />
+    <Compile Include="Problems\Problems41to50.cs" />
     <Compile Include="Problems\Problems71to80.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProjectEuler.cs" />

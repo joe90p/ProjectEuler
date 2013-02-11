@@ -129,6 +129,11 @@ namespace ProjectEuler
             }
         }
 
+        public static int ConvertToDecimal(IEnumerable<int> listAsNumber)
+        {
+            return listAsNumber.Reverse().Select((x, i) => x * Power(10, i)).Sum();
+        }
+
 
         public static IEnumerable<Tuple<int, int>> GetPythagTriplePerimeterCount(int upToPerimeter)
         {
@@ -171,5 +176,7 @@ namespace ProjectEuler
                 m++;
             }
         }
+
+        
     }
 }
