@@ -11,7 +11,7 @@ namespace ProjectEuler
         static void Main(string[] args)
         {
             var p = new Problems();
-            var d =p.Problem32();
+            p.Problem41();
         }
     }
 }

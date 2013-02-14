@@ -31,6 +31,9 @@ namespace ProjectEuler
                 }
             }
         }
+
+        
+
         public IEnumerable<IEnumerable<int>> GetPerms(int n)
         {
             var range = Enumerable.Range(1, n).Select(x => x.ToEnumerable());
