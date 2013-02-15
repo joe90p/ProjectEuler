@@ -36,7 +36,13 @@ namespace ProjectEuler
 
         public IEnumerable<IEnumerable<int>> GetPerms(int n)
         {
-            var range = Enumerable.Range(1, n).Select(x => x.ToEnumerable());
+            return this.GetPerms(1, n);
+
+        }
+
+        public IEnumerable<IEnumerable<int>> GetPerms(int min, int count)
+        {
+            var range = Enumerable.Range(min, count).Select(x => x.ToEnumerable());
             return range.Aggregate(Enumerable.Repeat(Enumerable.Empty<int>(), 1), PermAggregate);
 
         }

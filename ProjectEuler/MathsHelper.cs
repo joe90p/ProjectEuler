@@ -134,6 +134,11 @@ namespace ProjectEuler
             return listAsNumber.Reverse().Select((x, i) => x * Power(10, i)).Sum();
         }
 
+        public static long ConvertToLongDecimal(IEnumerable<int> listAsNumber)
+        {
+            return listAsNumber.Reverse().Select((x, i) => x * Power(10, i)).Select(Convert.ToInt64).Sum();
+        }
+
 
         public static IEnumerable<Tuple<int, int>> GetPythagTriplePerimeterCount(int upToPerimeter)
         {
