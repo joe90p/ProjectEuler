@@ -9,139 +9,6 @@ namespace ProjectEuler
 {
     public class ProjectEuler
     {
-        
-
-        
-
-        public void ProblemEleven()
-        {
-            double x = Math.Pow(2, 40);
-        }
-
-        public void ProblemTwelve()
-        {
-            int numberOfFactors = 0;
-            int n = 0;
-
-            while (numberOfFactors < 5)
-            {
-                n++;
-                numberOfFactors = this.NumberOfFactors(n);
-            }
-        }
-
-        public void Problem13()
-        {
-            List<List<int>> list = new List<List<int>>();
-            /*List<int> n = GetAsListRepresentingNumber("30786");
-            List<int> m = GetAsListRepresentingNumber("34534");
-            List<int> p = GetAsListRepresentingNumber("7");
-            list.Add(m);
-            list.Add(n);
-            list.Add(p);*/
-            list.Add(GetAsListRepresentingNumber("37107287533902102798797998220837590246510135740250"));
-            list.Add(GetAsListRepresentingNumber("46376937677490009712648124896970078050417018260538"));
-            list.Add(GetAsListRepresentingNumber("74324986199524741059474233309513058123726617309629"));
-            list.Add(GetAsListRepresentingNumber("91942213363574161572522430563301811072406154908250"));
-            list.Add(GetAsListRepresentingNumber("23067588207539346171171980310421047513778063246676"));
-            list.Add(GetAsListRepresentingNumber("89261670696623633820136378418383684178734361726757"));
-            list.Add(GetAsListRepresentingNumber("28112879812849979408065481931592621691275889832738"));
-            list.Add(GetAsListRepresentingNumber("44274228917432520321923589422876796487670272189318"));
-            list.Add(GetAsListRepresentingNumber("47451445736001306439091167216856844588711603153276"));
-            list.Add(GetAsListRepresentingNumber("70386486105843025439939619828917593665686757934951"));
-            list.Add(GetAsListRepresentingNumber("62176457141856560629502157223196586755079324193331"));
-            list.Add(GetAsListRepresentingNumber("64906352462741904929101432445813822663347944758178"));
-            list.Add(GetAsListRepresentingNumber("92575867718337217661963751590579239728245598838407"));
-            list.Add(GetAsListRepresentingNumber("58203565325359399008402633568948830189458628227828"));
-            list.Add(GetAsListRepresentingNumber("80181199384826282014278194139940567587151170094390"));
-            list.Add(GetAsListRepresentingNumber("35398664372827112653829987240784473053190104293586"));
-            list.Add(GetAsListRepresentingNumber("86515506006295864861532075273371959191420517255829"));
-            list.Add(GetAsListRepresentingNumber("71693888707715466499115593487603532921714970056938"));
-            list.Add(GetAsListRepresentingNumber("54370070576826684624621495650076471787294438377604"));
-            list.Add(GetAsListRepresentingNumber("53282654108756828443191190634694037855217779295145"));
-            list.Add(GetAsListRepresentingNumber("36123272525000296071075082563815656710885258350721"));
-            list.Add(GetAsListRepresentingNumber("45876576172410976447339110607218265236877223636045"));
-            list.Add(GetAsListRepresentingNumber("17423706905851860660448207621209813287860733969412"));
-            list.Add(GetAsListRepresentingNumber("81142660418086830619328460811191061556940512689692"));
-            list.Add(GetAsListRepresentingNumber("51934325451728388641918047049293215058642563049483"));
-            list.Add(GetAsListRepresentingNumber("62467221648435076201727918039944693004732956340691"));
-            list.Add(GetAsListRepresentingNumber("15732444386908125794514089057706229429197107928209"));
-            list.Add(GetAsListRepresentingNumber("55037687525678773091862540744969844508330393682126"));
-            list.Add(GetAsListRepresentingNumber("18336384825330154686196124348767681297534375946515"));
-            list.Add(GetAsListRepresentingNumber("80386287592878490201521685554828717201219257766954"));
-            list.Add(GetAsListRepresentingNumber("78182833757993103614740356856449095527097864797581"));
-            list.Add(GetAsListRepresentingNumber("16726320100436897842553539920931837441497806860984"));
-            list.Add(GetAsListRepresentingNumber("48403098129077791799088218795327364475675590848030"));
-            list.Add(GetAsListRepresentingNumber("87086987551392711854517078544161852424320693150332"));
-            list.Add(GetAsListRepresentingNumber("59959406895756536782107074926966537676326235447210"));
-            list.Add(GetAsListRepresentingNumber("69793950679652694742597709739166693763042633987085"));
-            list.Add(GetAsListRepresentingNumber("41052684708299085211399427365734116182760315001271"));
-            list.Add(GetAsListRepresentingNumber("65378607361501080857009149939512557028198746004375"));
-            list.Add(GetAsListRepresentingNumber("35829035317434717326932123578154982629742552737307"));
-            list.Add(GetAsListRepresentingNumber("94953759765105305946966067683156574377167401875275"));
-            list.Add(GetAsListRepresentingNumber("88902802571733229619176668713819931811048770190271"));
-            list.Add(GetAsListRepresentingNumber("25267680276078003013678680992525463401061632866526"));
-            list.Add(GetAsListRepresentingNumber("36270218540497705585629946580636237993140746255962"));
-            list.Add(GetAsListRepresentingNumber("24074486908231174977792365466257246923322810917141"));
-            list.Add(GetAsListRepresentingNumber("91430288197103288597806669760892938638285025333403"));
-            list.Add(GetAsListRepresentingNumber("34413065578016127815921815005561868836468420090470"));
-            list.Add(GetAsListRepresentingNumber("23053081172816430487623791969842487255036638784583"));
-            list.Add(GetAsListRepresentingNumber("11487696932154902810424020138335124462181441773470"));
-            list.Add(GetAsListRepresentingNumber("63783299490636259666498587618221225225512486764533"));
-            list.Add(GetAsListRepresentingNumber("67720186971698544312419572409913959008952310058822"));
-            list.Add(GetAsListRepresentingNumber("95548255300263520781532296796249481641953868218774"));
-            list.Add(GetAsListRepresentingNumber("76085327132285723110424803456124867697064507995236"));
-            list.Add(GetAsListRepresentingNumber("37774242535411291684276865538926205024910326572967"));
-            list.Add(GetAsListRepresentingNumber("23701913275725675285653248258265463092207058596522"));
-            list.Add(GetAsListRepresentingNumber("29798860272258331913126375147341994889534765745501"));
-            list.Add(GetAsListRepresentingNumber("18495701454879288984856827726077713721403798879715"));
-            list.Add(GetAsListRepresentingNumber("38298203783031473527721580348144513491373226651381"));
-            list.Add(GetAsListRepresentingNumber("34829543829199918180278916522431027392251122869539"));
-            list.Add(GetAsListRepresentingNumber("40957953066405232632538044100059654939159879593635"));
-            list.Add(GetAsListRepresentingNumber("29746152185502371307642255121183693803580388584903"));
-            list.Add(GetAsListRepresentingNumber("41698116222072977186158236678424689157993532961922"));
-            list.Add(GetAsListRepresentingNumber("62467957194401269043877107275048102390895523597457"));
-            list.Add(GetAsListRepresentingNumber("23189706772547915061505504953922979530901129967519"));
-            list.Add(GetAsListRepresentingNumber("86188088225875314529584099251203829009407770775672"));
-            list.Add(GetAsListRepresentingNumber("11306739708304724483816533873502340845647058077308"));
-            list.Add(GetAsListRepresentingNumber("82959174767140363198008187129011875491310547126581"));
-            list.Add(GetAsListRepresentingNumber("97623331044818386269515456334926366572897563400500"));
-            list.Add(GetAsListRepresentingNumber("42846280183517070527831839425882145521227251250327"));
-            list.Add(GetAsListRepresentingNumber("55121603546981200581762165212827652751691296897789"));
-            list.Add(GetAsListRepresentingNumber("32238195734329339946437501907836945765883352399886"));
-            list.Add(GetAsListRepresentingNumber("75506164965184775180738168837861091527357929701337"));
-            list.Add(GetAsListRepresentingNumber("62177842752192623401942399639168044983993173312731"));
-            list.Add(GetAsListRepresentingNumber("32924185707147349566916674687634660915035914677504"));
-            list.Add(GetAsListRepresentingNumber("99518671430235219628894890102423325116913619626622"));
-            list.Add(GetAsListRepresentingNumber("73267460800591547471830798392868535206946944540724"));
-            list.Add(GetAsListRepresentingNumber("76841822524674417161514036427982273348055556214818"));
-            list.Add(GetAsListRepresentingNumber("97142617910342598647204516893989422179826088076852"));
-            list.Add(GetAsListRepresentingNumber("87783646182799346313767754307809363333018982642090"));
-            list.Add(GetAsListRepresentingNumber("10848802521674670883215120185883543223812876952786"));
-            list.Add(GetAsListRepresentingNumber("71329612474782464538636993009049310363619763878039"));
-            list.Add(GetAsListRepresentingNumber("62184073572399794223406235393808339651327408011116"));
-            list.Add(GetAsListRepresentingNumber("66627891981488087797941876876144230030984490851411"));
-            list.Add(GetAsListRepresentingNumber("60661826293682836764744779239180335110989069790714"));
-            list.Add(GetAsListRepresentingNumber("85786944089552990653640447425576083659976645795096"));
-            list.Add(GetAsListRepresentingNumber("66024396409905389607120198219976047599490197230297"));
-            list.Add(GetAsListRepresentingNumber("64913982680032973156037120041377903785566085089252"));
-            list.Add(GetAsListRepresentingNumber("16730939319872750275468906903707539413042652315011"));
-            list.Add(GetAsListRepresentingNumber("94809377245048795150954100921645863754710598436791"));
-            list.Add(GetAsListRepresentingNumber("78639167021187492431995700641917969777599028300699"));
-            list.Add(GetAsListRepresentingNumber("15368713711936614952811305876380278410754449733078"));
-            list.Add(GetAsListRepresentingNumber("40789923115535562561142322423255033685442488917353"));
-            list.Add(GetAsListRepresentingNumber("44889911501440648020369068063960672322193204149535"));
-            list.Add(GetAsListRepresentingNumber("41503128880339536053299340368006977710650566631954"));
-            list.Add(GetAsListRepresentingNumber("81234880673210146739058568557934581403627822703280"));
-            list.Add(GetAsListRepresentingNumber("82616570773948327592232845941706525094512325230608"));
-            list.Add(GetAsListRepresentingNumber("22918802058777319719839450180888072429661980811197"));
-            list.Add(GetAsListRepresentingNumber("77158542502016545090413245809786882778948721859617"));
-            list.Add(GetAsListRepresentingNumber("72107838435069186155435662884062257473692284509516"));
-            list.Add(GetAsListRepresentingNumber("20849603980134001723930671666823555245252804609722"));
-            list.Add(GetAsListRepresentingNumber("53503534226472524250874054075591789781264330331690"));
-            List<int> result = this.AddListRepresentingNumbers(list);
-        }
-
         public long Problem14()
         {
             long largestChainCount = 0;
@@ -187,7 +54,7 @@ namespace ProjectEuler
 
             for (int index = 1; index <= 1000; index++)
             {
-                this.MultiplyListRepresentingNumberVoid(listRepresentingNumber, 2);
+                BigNumberHelper.MultiplyListRepresentingNumberVoid(listRepresentingNumber, 2);
             }
 
             int answer = listRepresentingNumber.Sum();
@@ -229,7 +96,7 @@ namespace ProjectEuler
 
             int test = 1234;
             int runningTotal = 0;
-            List<int> number = this.GetAsListRepresentingNumber(test);
+            List<int> number = BigNumberHelper.GetAsListRepresentingNumber(test);
 
             if (number.Count == 4)
             {
@@ -313,13 +180,13 @@ namespace ProjectEuler
         public void ProblemTwenty()
         {
             int i = 100;
-            List<int> num = this.GetAsListRepresentingNumber(i);
+            List<int> num = BigNumberHelper.GetAsListRepresentingNumber(i);
 
 
             while (i > 1)
             {
-                List<int> num2 = this.GetAsListRepresentingNumber(i - 1);
-                num = this.MultiplyListRepresentingNumber(num, num2);
+                List<int> num2 = BigNumberHelper.GetAsListRepresentingNumber(i - 1);
+                num = BigNumberHelper.MultiplyListRepresentingNumber(num, num2);
                 i--;
             }
 
@@ -334,12 +201,12 @@ namespace ProjectEuler
         public int Problem25()
         {
             List<int> result = new List<int>();
-            List<int> prevprev = GetAsListRepresentingNumber(1);
-            List<int> prev = GetAsListRepresentingNumber(1);
+            List<int> prevprev = BigNumberHelper.GetAsListRepresentingNumber(1);
+            List<int> prev = BigNumberHelper.GetAsListRepresentingNumber(1);
             int n = 2;
             while (result.Count() < 1000)
             {
-                result = AddListRepresentingNumbers(prevprev, prev);
+                result = BigNumberHelper.AddListRepresentingNumbers(prevprev, prev);
                 prevprev = prev;
                 prev = result;
                 n++;
@@ -430,198 +297,9 @@ namespace ProjectEuler
             return triangle[0][0];
         }
 
-        private int NumberOfFactors(int n)
-        {
-            int count = 0;
-            bool squareFlag = false;
-            int upperLimit = (int)Math.Ceiling(Math.Sqrt((double)n));
-            for (int x = 2; x <= upperLimit; x++)
-            {
-                if (n % x == 0)
-                {
-
-                    if (x != upperLimit)
-                    {
-                        count++;
-                    }
-                    else
-                    {
-                        squareFlag = (n / x == x);
-                    }
-
-                }
-
-            }
-            int result = (count * 2) + 2;
-            return squareFlag ? result - 1 : result;
-
-        }
-
         
 
-        private void MultiplyListRepresentingNumberVoid(List<int> listRepresentingNumber, int multiplyBy)
-        {
-            int carryOver = 0;
-            for (int listPosition = 0; listPosition < listRepresentingNumber.Count; listPosition++)
-            {
-                int multiplied = (listRepresentingNumber[listPosition] * multiplyBy) + carryOver;
-                if (multiplied >= 10)
-                {
-                    int factorOf10 = multiplied / 10;
-                    int remainder = multiplied % 10;
-                    listRepresentingNumber[listPosition] = remainder;
-                    carryOver = factorOf10;
-                }
-                else
-                {
-                    listRepresentingNumber[listPosition] = multiplied;
-                    carryOver = 0;
-                }
-            }
-
-            if (carryOver > 0)
-            {
-                listRepresentingNumber.Add(carryOver);
-            }
-        }
-
-        private List<int> MultiplyListRepresentingNumber(List<int> listRepresentingNumber, int multiplyBy, int maxLength)
-        {
-            listRepresentingNumber = new List<int>(listRepresentingNumber);
-            int carryOver = 0;
-            for (int listPosition = 0; listPosition < Math.Min(listRepresentingNumber.Count, maxLength); listPosition++)
-            {
-                int multiplied = (listRepresentingNumber[listPosition] * multiplyBy) + carryOver;
-                if (multiplied >= 10)
-                {
-                    int factorOf10 = multiplied / 10;
-                    int remainder = multiplied % 10;
-                    listRepresentingNumber[listPosition] = remainder;
-                    carryOver = factorOf10;
-                }
-                else
-                {
-                    listRepresentingNumber[listPosition] = multiplied;
-                    carryOver = 0;
-                }
-            }
-
-            if (carryOver > 0)
-            {
-                listRepresentingNumber.Add(carryOver);
-            }
-            return listRepresentingNumber.Take(maxLength).ToList();
-        }
-
-        private List<int> GetAsListRepresentingNumber(int number)
-        {
-            List<int> result = new List<int>();
-            double maxPowerOf10 = Math.Log((double)number) / Math.Log(10.0);
-            int maxPowerOf10AsInt = (int)(Math.Floor(maxPowerOf10));
-            for (int i = maxPowerOf10AsInt; i >= 0; i--)
-            {
-                int powerOf10 = (int)(Math.Pow(10.0, (double)i));
-                int powerOf10PlusOne = (int)(Math.Pow(10.0, (double)i + 1));
-
-                int div1 = (number / powerOf10);
-                int div2 = (number / powerOf10PlusOne);
-                int ds = div1 - (10 * div2);
-                result.Insert(0, ds);
-            }
-
-            return result;
-
-        }
-
-        private List<int> GetAsListRepresentingNumber(string number)
-        {
-            List<int> result = new List<int>();
-            foreach (char c in number)
-            {
-                int i = Int16.Parse(c.ToString());
-                result.Insert(0, i);
-            }
-
-            return result;
-        }
-
-        public List<int> MultiplyListRepresentingNumber(List<int> listRepresentingNumber, List<int> listRepresentingNumber2)
-        {
-            int carryOver = 0;
-            List<List<int>> listOfLists = new List<List<int>>();
-            for (int i = 0; i < listRepresentingNumber.Count; i++)
-            {
-                List<int> mult = new List<int>(listRepresentingNumber2);
-
-                this.MultiplyListRepresentingNumberVoid(mult, listRepresentingNumber[i]);
-                for (int j = 0; j < i; j++)
-                {
-                    mult.Insert(0, 0);
-                }
-                listOfLists.Add(mult);
-            }
-
-            List<int> result = new List<int>();
-            result.Add(0);
-
-
-            foreach (List<int> list in listOfLists)
-            {
-                result = this.AddListRepresentingNumbers(result, list);
-            }
-
-            return result;
-        }
-
-        public List<int> AddListRepresentingNumbers(List<int> listRepresentingNumber, List<int> listRepresentingNumber2)
-        {
-            List<int> addedNumber = new List<int>();
-            int carryOver = 0;
-            int maxCount = Math.Max(listRepresentingNumber.Count, listRepresentingNumber2.Count);
-            for (int i = 0; i < maxCount; i++)
-            {
-                int a = 0;
-                int b = 0;
-                if (i < listRepresentingNumber.Count)
-                {
-                    a = listRepresentingNumber[i];
-                }
-                if (i < listRepresentingNumber2.Count)
-                {
-                    b = listRepresentingNumber2[i];
-                }
-                int added = a + b + carryOver;
-                if (added >= 10)
-                {
-                    int factorOf10 = added / 10;
-                    int remainder = added % 10;
-                    addedNumber.Add(remainder);
-                    carryOver = factorOf10;
-                }
-                else
-                {
-                    addedNumber.Add(added);
-                    carryOver = 0;
-                }
-            }
-            if (carryOver > 0)
-            {
-                addedNumber.Add(carryOver);
-            }
-            return addedNumber;
-        }
-
-        public List<int> AddListRepresentingNumbers(List<List<int>> listOfListRepresentingNumbers)
-        {
-            List<int> result = new List<int>();
-            result.Add(0);
-            foreach (List<int> listRepresentingNumber in listOfListRepresentingNumbers)
-            {
-                result = AddListRepresentingNumbers(result, listRepresentingNumber);
-            }
-
-            return result;
-        }
+        
 
         private int Factorial(int n)
         {
@@ -899,7 +577,7 @@ namespace ProjectEuler
             var digitMapLookup = new KeyValueMap<int, int>(digitMap);
             Func<IEnumerable<int>, int> digitSum = xs => xs.Select(digitMapLookup.GetValue).Sum();
             return Enumerable.Range(10, upperLimit)
-                                .Select(x => new { Num = x, ListNum = GetAsListRepresentingNumber(x) })
+                                .Select(x => new { Num = x, ListNum = BigNumberHelper.GetAsListRepresentingNumber(x) })
                                 .Where(x => x.Num == digitSum(x.ListNum))
                                 .Sum(x => x.Num);
         }
@@ -970,12 +648,12 @@ namespace ProjectEuler
         public void Problem97()
         {
             var q = Enumerable.Repeat(2, 7830457);
-            var rt = q.Aggregate(Enumerable.Repeat<int>(1, 1).ToList(), (x, y) => MultiplyListRepresentingNumber(x, y, 10));
+            var rt = q.Aggregate(Enumerable.Repeat<int>(1, 1).ToList(), (x, y) => BigNumberHelper.MultiplyListRepresentingNumber(x, y, 10));
 
             //MultiplyListRepresentingNumberVoid(rt, 28433);
-            var d = GetAsListRepresentingNumber(28433);
+            var d = BigNumberHelper.GetAsListRepresentingNumber(28433);
 
-            var s = MultiplyListRepresentingNumber(rt, d);
+            var s = BigNumberHelper.MultiplyListRepresentingNumber(rt, d);
 
 
         }
@@ -1046,7 +724,7 @@ namespace ProjectEuler
                 index++;
             }*/
 
-            var multi = t.Select(q => Tuple.Create(MultiplyListRepresentingNumber(q.Item1.ToList(), q.Item1.ToList()), q.Item1)).ToList();
+            var multi = t.Select(q => Tuple.Create(BigNumberHelper.MultiplyListRepresentingNumber(q.Item1.ToList(), q.Item1.ToList()), q.Item1)).ToList();
             //multi.Where(d=> d.All(
             multi = multi.Where(df => df.Item1.Count == 19 || (df.Item1.Count == 20 && df.Item1[19] == 0)).Select(sw => Tuple.Create(sw.Item1.Take(19).ToList(), sw.Item2)).ToList();
             int counter = 0;

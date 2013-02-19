@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,15 +9,35 @@ namespace ProjectEuler
 {
     public partial class Problems
     {
-        /*If the numbers 1 to 5 are written out in words: one, two, three, four, five, 
-         * then there are 3 + 3 + 5 + 4 + 4 = 19 letters used in total.
 
-If all the numbers from 1 to 1000 (one thousand) inclusive were written out in words, how many letters 
-         * would be used?
+        public void Problem11()
+        {
+            //Not sure what has happened to the solution to this??
+        }
 
-NOTE: Do not count spaces or hyphens. For example, 342 (three hundred and forty-two) contains 23 letters 
-         * and 115 (one hundred and fifteen) contains 20 letters. The use of "and" when writing out numbers 
-         * is in compliance with British usage.*/
+        public int Problem12()
+        {
+            int numberOfFactors = 0;
+            int n = 0;
+            int triangle = 0;
+
+            while (numberOfFactors < 500)
+            {
+                n++;
+                triangle += n;
+                numberOfFactors = MathsHelper.NumberOfFactors(triangle);
+            }
+
+            return triangle;
+        }
+
+        public IEnumerable<int> Problem13()
+        {
+            var list = new List<List<int>>();
+            var fileLines = File.ReadAllLines("C:\\Phil\\PE\\ProjectEuler\\ProjectEuler\\Problems\\BigNumbers.txt").ToList();
+            var nums = fileLines.Select(BigNumberHelper.GetAsListRepresentingNumber).ToList();
+            return BigNumberHelper.AddListRepresentingNumbers(nums).ToArray().Reverse().Take(10);
+        }
 
         public void Problem17()
         {
@@ -79,11 +100,7 @@ NOTE: Do not count spaces or hyphens. For example, 342 (three hundred and forty-
                 }
                 return toReturn;
             }
-            if (x == 1000)
-            {
-                return "onethousand";
-            }
-            return string.Empty;
+            return x == 1000 ? "onethousand" : string.Empty;
         }
     }
 }

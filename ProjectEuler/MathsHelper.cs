@@ -139,7 +139,6 @@ namespace ProjectEuler
             return listAsNumber.Reverse().Select((x, i) => x * Power(10, i)).Select(Convert.ToInt64).Sum();
         }
 
-
         public static IEnumerable<Tuple<int, int>> GetPythagTriplePerimeterCount(int upToPerimeter)
         {
             var perimetersOfPrimitivePythagoreanTriplets = GetPerimetersOfPrimitivePythagoreanTriplets(upToPerimeter).
@@ -180,6 +179,33 @@ namespace ProjectEuler
                 }
                 m++;
             }
+        }
+
+        public static int NumberOfFactors(int n)
+        {
+            int count = 0;
+            bool squareFlag = false;
+            int upperLimit = (int)Math.Ceiling(Math.Sqrt((double)n));
+            for (int x = 2; x <= upperLimit; x++)
+            {
+                if (n % x == 0)
+                {
+
+                    if (x != upperLimit)
+                    {
+                        count++;
+                    }
+                    else
+                    {
+                        squareFlag = (n / x == x);
+                    }
+
+                }
+
+            }
+            int result = (count * 2) + 2;
+            return squareFlag ? result - 1 : result;
+
         }
 
         
