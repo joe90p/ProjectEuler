@@ -9,43 +9,7 @@ namespace ProjectEuler
 {
     public class ProjectEuler
     {
-        public long Problem14()
-        {
-            long largestChainCount = 0;
-            long numberWithLargestChainCount = 0;
-            Dictionary<long, long> numberChainLength = new Dictionary<long, long>();
-            for (long i = 1000000; i > 1; i--)
-            {
-                long chainCount = 1;
-                long j = i;
-                while (j > 1)
-                {
-                    j = this.GeneratorProblem14(j);
-                    if (numberChainLength.ContainsKey(j))
-                    {
-                        chainCount = chainCount + numberChainLength[j];
-                        break;
-                    }
-                    else
-                    {
-                        chainCount++;
-                    }
-                }
-                numberChainLength[i] = chainCount;
-                if (chainCount > largestChainCount)
-                {
-                    largestChainCount = chainCount;
-                    numberWithLargestChainCount = i;
-                }
-            }
-
-            return numberWithLargestChainCount;
-        }
-
-        private long GeneratorProblem14(long n)
-        {
-            return n % 2 == 0 ? (n / 2) : (3 * n) + 1;
-        }
+        
 
         public void ProblemSixteen()
         {
