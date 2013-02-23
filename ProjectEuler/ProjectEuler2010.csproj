@@ -56,6 +56,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SequenceHelper.cs" />
+    <Compile Include="TriangleSummer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Problems\Problem1to10MathsResults.txt" />

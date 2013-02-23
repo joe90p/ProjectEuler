@@ -73,13 +73,26 @@ namespace ProjectEuler
             return numberWithLargestChainCount;
         }
 
-        public int Problem14(int n, int length)
+        public void Problem15()
         {
-
-            return 0;
+            throw new NotImplementedException();
         }
 
-        public void Problem17()
+        public int Problem16()
+        {
+            List<int> listRepresentingNumber = new List<int>();
+            listRepresentingNumber.Add(1);
+
+            for (int index = 1; index <= 1000; index++)
+            {
+                BigNumberHelper.MultiplyListRepresentingNumberVoid(listRepresentingNumber, 2);
+            }
+
+            int answer = listRepresentingNumber.Sum();
+            return answer;
+        }
+
+        public int Problem17()
         {
             var numbers = new Dictionary<int, string>
                               {
@@ -119,6 +132,61 @@ namespace ProjectEuler
 
             var hello = Enumerable.Range(1, 1000).Select(getnumberLetterCount).ToList();
             var answer = hello.Select(x => x.Count()).Sum();
+            return answer;
+        }
+
+        public long Problem18()
+        {
+            var ts = new TriangleSummer("C:\\Users\\Phil\\Documents\\GitHub\\ProjectEuler\\ProjectEuler\\Problems\\P18.txt");
+            var answer = ts.FindMaxSumInTriangle();
+            return answer;
+
+        }
+
+        public int Problem19()
+        {
+            const int sunday = 6;
+            const int startYear = 1901;
+            int nextStartingDay = 0;
+            int sundaysOnFirstDayOfMonth = 0;
+
+            Func<int,bool> isLeapYear = y => y % 4 == 0 && (y % 100 != 0 || y % 400 == 0);
+
+            for (int i = 0; i < 99; i++)
+            {
+                int[] numberofDaysInMonthForYear = new int[12] { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+                numberofDaysInMonthForYear[1] = isLeapYear(startYear + i) ? 29 : 28;
+                foreach (int daysInMonth in numberofDaysInMonthForYear)
+                {
+                    nextStartingDay = nextStartingDay + daysInMonth % 7;
+                    nextStartingDay = nextStartingDay >= 7 ? nextStartingDay - 7 : nextStartingDay;
+                    if (nextStartingDay == sunday)
+                    {
+                        sundaysOnFirstDayOfMonth++;
+                    }
+                }
+            }
+
+
+            return sundaysOnFirstDayOfMonth;
+
+        }
+
+        public int Problem20()
+        {
+            int i = 100;
+            List<int> num = BigNumberHelper.GetAsListRepresentingNumber(i);
+
+
+            while (i > 1)
+            {
+                List<int> num2 = BigNumberHelper.GetAsListRepresentingNumber(i - 1);
+                num = BigNumberHelper.MultiplyListRepresentingNumber(num, num2);
+                i--;
+            }
+
+            int answer = num.Sum();
+            return answer;
         }
 
         public string GetNumberLetterCount(int x, Dictionary<int, string> numbers)

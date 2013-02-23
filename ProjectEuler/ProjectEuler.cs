@@ -9,153 +9,6 @@ namespace ProjectEuler
 {
     public class ProjectEuler
     {
-        
-
-        public void ProblemSixteen()
-        {
-            List<int> listRepresentingNumber = new List<int>();
-            listRepresentingNumber.Add(1);
-
-            for (int index = 1; index <= 1000; index++)
-            {
-                BigNumberHelper.MultiplyListRepresentingNumberVoid(listRepresentingNumber, 2);
-            }
-
-            int answer = listRepresentingNumber.Sum();
-        }
-
-        public void ProblemSeventeen()
-        {
-            Dictionary<int, int> intsAsString = new Dictionary<int, int>();
-            intsAsString.Add(1, 3);
-            intsAsString.Add(2, 3);
-            intsAsString.Add(3, 5);
-            intsAsString.Add(4, 4);
-            intsAsString.Add(5, 4);
-            intsAsString.Add(6, 3);
-            intsAsString.Add(7, 5);
-            intsAsString.Add(8, 5);
-            intsAsString.Add(9, 4);
-            intsAsString.Add(10, 3);
-            intsAsString.Add(11, 6);
-            intsAsString.Add(12, 6);
-            intsAsString.Add(13, 8);
-            intsAsString.Add(14, 8);
-            intsAsString.Add(15, 7);
-            intsAsString.Add(16, 7);
-            intsAsString.Add(17, 9);
-            intsAsString.Add(18, 8);
-            intsAsString.Add(19, 8);
-
-            //tens
-            Dictionary<int, int> tensAsString = new Dictionary<int, int>();
-            tensAsString.Add(2, 6);
-            tensAsString.Add(3, 6);
-            tensAsString.Add(4, 5);
-            tensAsString.Add(5, 5);
-            tensAsString.Add(6, 5);
-            tensAsString.Add(7, 7);
-            tensAsString.Add(8, 6);
-            tensAsString.Add(9, 6);
-
-            int test = 1234;
-            int runningTotal = 0;
-            List<int> number = BigNumberHelper.GetAsListRepresentingNumber(test);
-
-            if (number.Count == 4)
-            {
-                runningTotal += 11;
-            }
-
-            if (number.Count == 3)
-            {
-                runningTotal += (intsAsString[number[2]] + 7);
-                if (number[1] == 0 && number[0] == 0)
-                {
-
-                }
-            }
-
-            if (number.Count == 2)
-            {
-                int asInt = number[1] * 10 + number[0];
-                if (asInt <= 19)
-                {
-                    runningTotal += intsAsString[asInt];
-                }
-                else
-                {
-                    if (number[0] == 0)
-                    {
-                        runningTotal += tensAsString[number[1]];
-                    }
-                    else
-                    {
-                        runningTotal += tensAsString[number[1]] + intsAsString[number[0]];
-                    }
-                }
-
-            }
-
-            if (number.Count == 1)
-            {
-                runningTotal += intsAsString[number[0]];
-            }
-
-
-        }
-
-        public long Problem18()
-        {
-            return this.FindMaxSumInTriangle("C:\\Euler18.txt");
-        }
-
-        public int Problem19()
-        {
-            int monthStartingDay = 0; //Monday = 0, Tuesday = 1 etc
-            int sunday = 6;
-            int startYear = 1901;
-            int year = 0;
-            int nextStartingDay = 0;
-            int sundaysOnFirstDayOfMonth = 0;
-
-
-
-            for (int i = 0; i < 99; i++)
-            {
-                int[] numberofDaysInMonthForYear = new int[12] { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-                numberofDaysInMonthForYear[1] = this.IsLeapYear(startYear + i) ? 29 : 28;
-                foreach (int daysInMonth in numberofDaysInMonthForYear)
-                {
-                    nextStartingDay = nextStartingDay + daysInMonth % 7;
-                    nextStartingDay = nextStartingDay >= 7 ? nextStartingDay - 7 : nextStartingDay;
-                    if (nextStartingDay == sunday)
-                    {
-                        sundaysOnFirstDayOfMonth++;
-                    }
-                }
-            }
-
-
-            return sundaysOnFirstDayOfMonth;
-
-        }
-
-        public void ProblemTwenty()
-        {
-            int i = 100;
-            List<int> num = BigNumberHelper.GetAsListRepresentingNumber(i);
-
-
-            while (i > 1)
-            {
-                List<int> num2 = BigNumberHelper.GetAsListRepresentingNumber(i - 1);
-                num = BigNumberHelper.MultiplyListRepresentingNumber(num, num2);
-                i--;
-            }
-
-            int answer = num.Sum();
-        }
 
         public List<int> Problem24()
         {
@@ -197,13 +50,12 @@ namespace ProjectEuler
 
         public long Problem67()
         {
-            return this.FindMaxSumInTriangle("C:\\Euler67.txt");
+            var ts = new TriangleSummer("C:\\Users\\Phil\\Documents\\GitHub\\ProjectEuler\\ProjectEuler\\Problems\\P67.txt");
+            var answer = ts.FindMaxSumInTriangle();
+            return answer;
         }
 
-        public bool IsLeapYear(int year)
-        {
-            return year % 4 == 0 && (year % 100 != 0 || year % 400 == 0);
-        }
+        
 
         private List<int> GetLexicographicPermutation(int totalPermutationLength, int permutationIndex)
         {
@@ -228,41 +80,6 @@ namespace ProjectEuler
 
             return result;
         }
-
-        private long FindMaxSumInTriangle(string filePath)
-        {
-            List<List<long>> triangle = new List<List<long>>();
-            using (StreamReader sr = new StreamReader(filePath))
-            {
-                String line;
-                while ((line = sr.ReadLine()) != null)
-                {
-                    List<long> numbers = new List<long>();
-                    string[] triangleLine = line.Split(' ');
-                    foreach (string numString in triangleLine)
-                    {
-                        string trimmedNumString = numString.TrimStart('0');
-                        long num = Int64.Parse(trimmedNumString);
-                        numbers.Add(num);
-                    }
-                    triangle.Add(numbers);
-                }
-            }
-
-            for (int i = triangle.Count - 2; i >= 0; i--)
-            {
-                for (int j = 0; j < triangle[i].Count; j++)
-                {
-                    long multiplier = Math.Max(triangle[i + 1][j], triangle[i + 1][j + 1]);
-                    triangle[i][j] += multiplier;
-                }
-            }
-
-            return triangle[0][0];
-        }
-
-        
-
         
 
         private int Factorial(int n)
